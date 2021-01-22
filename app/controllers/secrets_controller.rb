@@ -1,12 +1,18 @@
 class SecretsController < ApplicationController
 
     def show
-        if not_logged_in
-            redirect_to login_path
-        end
+        not_logged_in?
     end
 
-    def not_logged_in
-        session[:name].blank?
+    def secret
+        not_logged_in?
+    end
+
+    private
+
+    def not_logged_in?
+        if session[:name].blank?
+            redirect_to login_path
+        end
     end
 end
